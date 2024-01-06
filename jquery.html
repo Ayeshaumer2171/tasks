@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+    rel="stylesheet" type="text/css" />
+    <title>Document</title>
+   <style>
+    #signupForm .error {
+    color:red
+}
+#message{
+  color: red;
+}
+#weak{
+  color:red;
+}
+input{
+  width: 40%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  margin-left: 400px;
+  align-content: center;
+   display: flex;
+  justify-content: center;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+input[type=submit] {
+  /* background-color: #4CAF50; */
+  width: 10%;
+  color: white;
+  padding: 14px ;
+background-color: blueviolet;
+  border: 2px solid;
+  border-radius: 4px;
+  margin-left: 770px;
+  cursor: pointer;
+}
+input[type=submit]:hover {
+  background-color: #45a049;
+  background-color: rgb(136, 89, 179);
+}
+div{
+    border-radius: 20px;
+  background-color: #f2f2f2;
+  padding: 20px ;
+}
+body {
+    margin:50px 0px; padding:0px;
+    text-align:center;
+}
+.form1{
+    background-color: #45a049;
+}
+  </style>
+    
+</head>
+<body>
+    <div >
+        <div class="form1">
+    <form class="cmxform" id="signupForm" method="get"  autocomplete="off">
+           
+        <div style="border:1px;width:40%;margin-left: 370px;"><h1 class="h" >J Query Form Validation</h1> </div>       
+<p>
+<label for="firstname">Firstname</label><br>
+<input id="firstname" name="firstname" type="text"></input>
+</p>
+       
+<p>
+<label for="lastname">Lastname</label><br>
+<input id="lastname" name="lastname" type="text"></input>
+</p>
+             
+<p>
+ <label for="cnic">cnic</label><br>
+<input id="cnic" name="cnic" type="text"></input>
+</p>
+
+
+<p>
+  <label for="password">password</label><br>
+ <input id="password" name="password" type="password" class="input-field"> 
+ <i id="check" class="fa fa-fw fa-eye field_icon icon" style="position:absolute;margin-left:200px;margin-top:-40px"  ></i>
+</input>
+  </p>
+  <!-- <input type="checkbox" id="check" >
+ <p> 
+    show password
+ </p> -->
+
+
+ <p id="message"></p>
+ <p id="weak"></p>
+
+
+<p>
+<label for="email">Email</label><br>
+<input id="email" name="email" type="email"></input>
+</p>
+
+<p>
+  <label for="address">address</label><br>
+  <input id="address" name="address" type="address"></input>
+</p>
+
+<p>
+  <label for="mobileno">mobile no</label><br>
+  <input id="mobileno" name="mobileno" type="mobileno" value="+92"></input>
+</p>
+                     
+<p >
+<input class="submit" type="submit" value="submit"  >
+</p>
+    </form>  
+        </div>
+</div>      
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+   
+
+<script>
+
+
+$(document).ready(function () {
+ 
+ $("#signupForm").validate({
+     rules: {
+         firstname: "required",
+         lastname: "required",
+         address:"required",
+         mobileno:{
+          required: true,
+             minlength: 13,
+		  maxlength: 13,
+         },
+         password: {
+          required:true,
+            // minlength: 8,
+            maxlength:20
+        },
+         cnic: {
+             required: true,
+             minlength: 15,
+             maxlength:15
+         },
+         email: {
+             required: true,
+             email: true
+         },
+
+     },
+     messages: {
+         firstname: " Please enter your firstname",
+         lastname: " Please enter your lastname",
+         address:" please enter your address",
+         mobileno:{
+          required:"please enter mobile number",
+         minlength:"your number must consist of at least 13 characters"
+         },
+         cnic: {
+             required: " Please enter a cnic",
+             minlength: " Your cnic must consist of at least 15 characters"
+         },
+
+     }
+ });
+});
+
+//password
+jQuery("#password").keyup(function(e){
+    if (!(/^(?=.[a-z])(?=.[A-Z])(?=.[0-9])(?=.[@#$%&])(.{8,20}$)/.test(password))) {
+        return false;
+      //  $('#message').text('please enter valid password with one uppercase,one uppercase ,one digit,one text');
+    }
+    return true;
+ }, function (value, element) {
+    let password = $("#password").val();
+    
+
+    if (!(/^(.{8,20}$)/.test(password))) {
+       $("#message").text("length inappropriate");
+       $("#weak").text("weak password");
+    }
+    else if (!(/^(?=.*[A-Z])/.test(password))) {
+        $("#message").text("Password must contain at least one uppercase");
+        $("#weak").text("weak password");
+    }
+    else if (!(/^(?=.*[a-z])/.test(password))) {
+        $("#message").text("Password must contain at least one lowercase.");
+        $("#weak").text("weak password");
+    }
+    else if (!(/^(?=.*[0-9])/.test(password))) {
+       $("#message").text("Password must contain at least one digit.");
+       $("#weak").text("weak password");
+    }
+    else if (!(/^(?=.*[@#$%&])/.test(password))) {
+        $("#message").text("Password must contain special characters from @#$%&.");
+        $("#weak").text("weak password");
+    }
+    else if ((/^(?=.*[@#$%&])/.test(password))) {
+        $("#message").text("password is strong");
+        $("#weak").text("You have successfully choose the strong password");
+    }
+    return false;
+});
+
+
+
+//show password
+// $(document).ready(function(){
+//             $('#check').click(function(){
+//                 $(this).is(':clicked') ? $('#password').attr('type', 'text') : $('#password').attr('type', 'password');
+//             });
+//         });
+$(function () {
+            $("#check").click(function () {
+                $(this).toggleClass("fa-eye fa-eye-slash");
+               var type = $(this).hasClass("fa-eye-slash") ? "text" : "password";
+                $("#password").attr("type", type);
+            });
+        });
+
+//cnic
+jQuery("#cnic").keyup(function(e){
+		var cnic = jQuery("#cnic").val();
+		
+		if(e.keyCode == 8 && (cnic.length == 5 || cnic.length == 13) ) {
+			return true;
+		}
+		if(cnic.length == 5) {
+			jQuery("#cnic").val(cnic+'-');
+		}
+		if(cnic.length == 13) {
+			jQuery("#cnic").val(cnic+'-');
+		}
+        var regExp = /[a-z]/i;
+  $('#cnic').on('keydown keyup', function(e) {
+    var value = String.fromCharCode(e.which) || e.key;
+
+    // No letters
+    if (regExp.test(value)) {
+      e.preventDefault();
+      return false;
+    }
+    
+  });
+});
+
+//mobie no
+jQuery("#mobileno").keyup(function(e){
+		var cnic = jQuery("#mobileno").val();
+		
+		if(e.keyCode == 8 && (cnic.length == 5 || cnic.length == 13) ) {
+			return true;
+		}
+        var regExp = /[a-z]/i;
+  $('#mobileno').on('keydown keyup', function(e) {
+    var value = String.fromCharCode(e.which) || e.key;
+
+    // No letters
+    if (regExp.test(value)) {
+      e.preventDefault();
+      return false;
+    }
+
+    
+  });
+});
+
+
+
+
+
+// $(document).ready(function(){
+//     $("button").click(function(){
+//         let txt="";
+// txt +="width is"+$("#div1").width()+"<br/>";
+// txt +="height is"+$("#div1").height()+"<br/>";
+// $("#div1").html(txt);
+//     });
+// });
+// $(document).ready(function(){
+//     $("button").click(function(){
+//         $("p").css({"background-color":"yellow","font-size":"20px"})
+//     })
+// })
+// $(document).ready(function(){
+//   $("button").click(function(){
+//     $("h1, h2, p").addClass("blue");
+//     $("div").addClass("important");
+//   });
+// });
+
+// $(document).ready(function(){
+//   $("#btn1").click(function(){
+//     $("p").append(" <b>Appended text</b>.");
+//   });
+
+//   $("#btn2").click(function(){
+//     $("ol").append("<li>Appended item</li>");
+//   });
+// });
+// $(document).ready(function(){
+//   $("#myInput").on("keyup", function() {
+//     var value = $(this).val().toLowerCase();
+//     $("#myTable tr").filter(function() {
+//       $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+//     });
+//   });
+// });
+</script>
+</html>

@@ -1,0 +1,33 @@
+.box{
+  display: flex;
+  justify-content: center;
+}
+.app{
+  margin-top: 50px;
+  padding-top: 20px;
+  padding-left: 200px;
+  border: 1px;
+  border: 2px solid greenyellow;
+  background-color:rgb(194, 194, 207);
+  height: 400px;
+  width: 500px;
+}
+.btn{
+  width: 20%;
+  height: 15%;
+  color: white;
+background-color: blueviolet;
+/* margin-left: 50px; */
+  border: 2px solid;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.txt{
+  width: 50%;
+  height: 30px;
+}
+.textarea{
+  height: 200px;
+  width:200px ;
+  background-color: white;
+}
